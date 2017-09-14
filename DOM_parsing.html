@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>DOM parsing sample</title>
+        <body>
+            Enter your name: <input type="text" name="username" id="username" value="sun.glasses"/>
+            <br>
+            <button id="echoButton">Echo</button>
+            <div id="container"></div>
+            <script>
+                var divEchoButton = document.getElementById("echoButton");
+                //w3 approach is using oncclick
+                // divEchoButton.onclick = echo2; //the function reference.
+
+                //another approach that allows you to call multiple event handlers
+                divEchoButton.addEventListener('click',echo2, false);
+
+                
+                //pattern 1
+                function echo(){
+                    var domUsername = document.getElementById("username");
+                    var username = domUsername.value;
+                    // console.log(username);
+
+                    var divEcho = document.getElementById("container");
+                    var containerText = document.createTextNode(username);
+                    divEcho.appendChild(containerText); //you keep appending withotu cleaning the html
+
+                }
+
+                //pattern 2
+                function echo2(){
+                    var domUsername = document.getElementById("username");
+                    var username = domUsername.value;
+                    // console.log(username);
+
+                    var divEcho = document.getElementById("container");
+                    divEcho.innerHTML = '<h3>' + username + '</h3>'; //you replace the innerHTMl
+                    divEcho.style.color="brown";
+                }
+            </script>
+        </body>
+    </head>
+</html>

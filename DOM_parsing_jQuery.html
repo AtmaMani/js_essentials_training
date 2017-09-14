@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Site color modify using jQuery</title>
+        <style>
+            /* write some CSS to specify color for tags div and span */
+            /* div, span {color:red;
+            font-family: Courier New, Courier, monospace;} */
+
+            /* now create a class in CSS to be manipulated by jQuery */
+            .fancy{
+                color:red;
+                font-family: cursive;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btnStyle">style document</button>
+
+
+        <div>This is my site</div>
+        <div>which will be modified using jQuery</div>
+        <p>
+            here is <span>some fancy text</span>!
+        </p>
+        <!-- reference jquery directly -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            console.log("page has fully loaded, ready for JS action");
+            var btn$ = $('#btnStyle');
+            var btnStyleText = btn$.text();
+            btn$.on('click', function(){
+                //find all div and span tags and apply the style
+                var elements4styling$ = $('div').add('span');    
+                // elements4styling$.addClass('fancy');
+                //code to make the button a toggle
+                elements4styling$.toggleClass('fancy');
+                if(elements4styling$.hasClass('fancy'))
+                {
+                    btn$.text("remove style");
+                }
+                else
+                {
+                    btn$.text(btnStyleText);
+                }
+                
+                //code to disable the button instead of toggle.
+                // btn$.attr("disabled", "disabled"); //change the attribute disabled to value disable
+            })
+        })
+        </script>
+    </body>
+</html>

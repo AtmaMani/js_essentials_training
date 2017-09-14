@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Mtg calc</title>
+    </head>
+    <body>
+        1. Enter property value: <input type="text" id="propValue" value="100000"/>
+        <br>
+        2. Enter downpayment percent: <input type="text" id="downPercent" value="25"/> %
+        <br>
+        3. Enter interest percent: <input type="text" id="intPercent" value="4.75"/>%
+        <br>
+        4. Enter loan term <input type="text" id="loanTerm" value="30"/> years
+        <br>
+        5. Enter tax amount per month: $ <input type="text" id="propTax" value="121"/>
+        <br>
+        6. Enter insurance per month: $ <input type="text" id="propIns" value="48"/>
+        <br>
+        <button id="calcButton">Calculate monthly payment</button>
+        <h2>
+            <p id="mPI">Monthly PI is : </p>
+        
+        <div id="mPITI"></div>
+        </h2>
+
+        <!-- use jQuery from CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                //All jQuery to run after loading and user feeds data
+                $('#calcButton').click(calcMonthlyPayment)
+            })
+
+            function calcMonthlyPayment(){
+                //read values
+                // var pValue$ = $('propValue').val()
+                var pValue = document.getElementById('propValue').value;
+                var dPercent = document.getElementById('downPercent').value;
+                var iPercent = document.getElementById('intPercent').value;
+                var lTermYears = document.getElementById('loanTerm').value;
+                var pTaxMonthly = document.getElementById('propTax').value;
+                var pInsMonthly = document.getElementById('propIns').value;
+
+                //compute monthly mortgage
+                var principal = Number(pValue) - (Number(pValue)*Number(dPercent))/100;
+                var n = Number(lTermYears)*12; //term in months
+                var r = (Number(iPercent)/100)/12 //interest rate /12
+                
+                var numerator = r* (Math.pow((1+r),n));
+                var denomenator = (Math.pow((1+r),n)) -1;
+
+                var monthlyPI = principal * numerator / denomenator; //monthly principal + interest
+                var monthlyPITI = monthlyPI + Number(pTaxMonthly) + Number(pInsMonthly); //PITI                
+                console.log(monthlyPI.toPrecision(5));
+                console.log(monthlyPITI.toPrecision(5));
+
+                //print results on the page
+                var div_mPI = document.getElementById('mPI');
+                var div_mPI$ = $('mPI');
+                div_mPI.innerHTML = "<h3> monthly PI: " + monthlyPI.toPrecision(5) + "</h3>";
+                console.log(div_mPI$.text());
+                // div_mPI$.text("monthly PI : " + monthlyPI.toPrecision(5));
+                // div_mPI$.html("<h2> monthly PI: " + monthlyPITI.toPrecision(5) + "</h2>");
+                var div_mPITI = document.getElementById("mPITI");
+                div_mPITI.innerHTML = "<h3> monthly PITI: " + monthlyPITI.toPrecision(5) + "</h3>";
+            }
+            // calcMonthlyPayment();
+        </script>
+    </body>
+</html>
