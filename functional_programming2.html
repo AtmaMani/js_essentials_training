@@ -1,0 +1,46 @@
+<html>
+    <body>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
+                forEach</a> and functional programming.
+                <br>
+                map function
+        <script>
+            var arr = [1,2,4,5,6];
+            function displayer(val){
+                console.log(val)
+            }
+
+            arr.forEach(displayer); //forEach requires you pass a function reference.
+
+            //Another is map function
+            var mappedArray = arr.map(function(current_val){
+                return {
+                    x:current_val,
+                    y:current_val*2
+                };
+            })
+
+            mappedArray.forEach(displayer);
+
+
+        //map function using 'this' keyword
+        var mappedArray2 = arr.map(function(current_val){
+                return {
+                    x:current_val,
+                    y:current_val*this
+                };
+            },3) //here the multiplier is hard coded to 3
+            mappedArray2.forEach(displayer);
+        
+        //map function using 'this' keyword -- next level
+        var mappedArray3 = arr.map(function(current_val){
+                return {
+                    x:current_val,
+                    y:this(current_val) //here 'this' is a function pointer - func programming.
+                };
+            },function(x){return 3*x + 4;}) //here the multiplier is a function
+
+            mappedArray3.forEach(displayer);
+        </script>
+    </body>
+</html>

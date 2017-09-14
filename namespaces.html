@@ -1,0 +1,17 @@
+<html>
+    <body>
+        namespaces in JS - weak :(
+            <script>
+                if (!atmNamespace)
+                {
+                    var atmNamespace = {}; //declare an object
+                }
+
+                atmNamespace.speak = function(txt){
+                    console.log(txt);
+                }
+
+                atmNamespace.speak("showut out");
+            </script>
+    </body>
+</html>

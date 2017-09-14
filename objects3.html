@@ -1,0 +1,31 @@
+<html>
+    <body>
+        using the `this` keyword.
+        <script>
+            
+            var person={
+                firstName:'Atma',
+                lastName:'mani',
+                speak:function(){
+                    console.log('My name is ' + this.firstName, this.lastName);
+                }
+            }
+
+            //person.speak() //will show the alert and the names.
+
+            var person2={
+                firstName:'py',
+                lastName:'Charm'
+            }
+            person.speak.call(person2) //we are calling person.speak but passing person2 to the this argument.
+
+            //showing the bind functionality - binding will bind to a particular parameter to send the this keyword
+            var speak_bound = person.speak.bind(person2);
+            
+            //if you want to keep the this keyword, open, simply use the function pointer as in func programming.
+            var func_pointer = person.speak;
+            speak_bound();
+            func_pointer.call(person2);
+        </script>
+    </body>
+</html>

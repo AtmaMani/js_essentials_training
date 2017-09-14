@@ -1,0 +1,46 @@
+<html>
+
+<body>
+    <script>
+        //Extend the object object
+        Object.prototype.dump = function(){
+            for (var key in this) {
+                var element = this[key];
+                console.log(key, element);
+            }
+        } 
+
+
+        //protecting user from badly instantiating the object
+        function Circle(radius) {
+            if (!(this instanceof Circle)) {
+                return new Circle(radius);
+            }
+            this.radius = radius;
+            this.calcArea = function () {
+                return (Math.pow(this.radius, 2) * Math.PI);
+            }
+        }
+
+        var cir3 = Circle(53);
+        console.log(cir3.calcArea());
+    </script>
+    <script>
+        cir3.dump(); 
+        //you can call this - even if you did not explicitly inheric Circle from Object. as all obj will be inherited from Object.
+        
+
+        //inherit and extend the Circle object you created
+        Circle.prototype.userExtened = function(){
+            return JSON.stringify(this);
+        }
+
+        //extend with a new property
+        Circle.prototype.pi = Math.PI;
+        var cir4 = new Circle(88);
+        console.log(cir4.userExtened());
+        console.log(cir4.pi);
+    </script>
+</body>
+
+</html>

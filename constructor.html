@@ -1,0 +1,53 @@
+<html>
+    <body>
+        <script>
+            //function constructor
+            var Account = function(id, name){
+                this.name = name;
+                this.id = id;
+                this.balance=0;
+                this.numTransactions=0;
+            }
+
+            //instantiating a new object - use 'new' keyword
+            var acc1 = new Account(34, 'labrador');
+            var acc2 = new Account(11, "poodle");
+
+            console.log(acc2.name);
+
+            //if you forget the new keyword, it will attach to the window obj
+            var acc3 = Account(3,"dalmation");
+            var acc4 = Account(3,"german shepard");
+            //console.log(acc3.name); //will throw an error saying name is undefined
+
+            //more function construtor
+            function Circle(radius){
+                this.radius=radius;
+                this.calcArea = function(){
+                    return (Math.pow(this.radius, 2)* Math.PI);
+                }
+            }
+            var cir1 = new Circle(3);
+            console.log(cir1.radius);
+            console.log(cir1.calcArea()); // 28.27
+            cir1.radius = 10;
+            console.log(cir1.calcArea()); // 314.88 or such
+
+
+            //protecting user from badly instantiating the object
+            function Circle(radius){
+                if (!(this instanceof Circle))
+                {
+                    return new Circle(radius);
+                }
+                this.radius=radius;
+                this.calcArea = function(){
+                    return (Math.pow(this.radius, 2)* Math.PI);
+                }
+            }
+
+            var cir3 = Circle(33);
+            console.log(cir3.calcArea());
+        </script>
+    </body>
+</html>

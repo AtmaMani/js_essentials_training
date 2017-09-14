@@ -1,0 +1,68 @@
+<html>
+    <body>
+        closures
+        <script>
+        function accumulate(n){
+            function increment(){
+                ++n;
+            }
+            function decrement(){
+                --n;
+            }
+            increment();
+            return n;
+        }
+        console.log(accumulate(10));
+
+        //advanced closure - twisted way in which you return an object that points to nested funcitons within your function.
+        function accumulate2(n){
+            function increment(){
+                ++n;
+            }
+            function decrement(){
+                --n;
+            }
+            function show(){
+                return n;
+            }
+            return {
+                inc:increment,
+                dec:decrement,
+                disp:show
+            }
+        }
+        var accumulator = accumulate2(15);
+        accumulator.inc();
+        accumulator.inc();
+        accumulator.dec();
+        console.log(accumulator.disp());
+
+        //singleton pattern - most popular in angular and all aspects of web dev
+        // this is a singleton because the object definition below is just discarded after accumulator_singleton is 
+        // instantiated.
+        var accumulator_singleton = (function (n){
+            function increment(){
+                ++n;
+            }
+            function decrement(){
+                --n;
+            }
+            function show(){
+                return n;
+            }
+            return {
+                inc:increment,
+                dec:decrement,
+                disp:show
+            }
+        })(34);
+        accumulator_singleton.inc();
+        console.log(accumulator_singleton.disp()); //will show 35
+
+        //can you assign accumulator_singleton to another var?
+        var accumulator_singleton2 = accumulator_singleton;
+        console.log(accumulator_singleton2.disp()); //will show 35 since it points to the same obj, still a singleton.
+    
+        </script>
+    </body>
+</html>

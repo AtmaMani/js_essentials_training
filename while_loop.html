@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <script>
+            var grade=window.prompt("enter grade");
+            // while(grade != null)
+            while(grade) //same as while(grade !== null && grade!="")
+            {
+                switch (grade) {
+                    case 'a':
+                        alert("good");
+                        break;
+                    case 'b':
+                        alert('nope');
+                        break;
+                    default:
+                        alert('default');
+                }
+                grade=window.prompt("enter another or cancel");
+            }
+            </script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <script src="./scripts/objects2.js"></script>
+        <script>
+            console.log(person2.firstName);
+            console.log(person2.push('broken car'));
+            console.log(person2.string_element('iphone new'));
+
+            var serialized = JSON.stringify(person2);
+            console.log(serialized);
+
+            var person3 = JSON.parse(serialized);
+            console.log(person3);
+        </script>
+    </body>
+</html>

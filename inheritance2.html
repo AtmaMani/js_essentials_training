@@ -1,0 +1,37 @@
+<html>
+    <body>
+        
+        <script>
+            function Animal(name){
+                this.name=name;
+            }
+            Animal.prototype.speak = function(){
+                alert(this.name +  " is barking");
+            }
+
+            function Person(name, age){
+                Animal.call(this, name);
+                this.age = age;
+                //the this arg points to the Person's instance which is passed to the constructor of 
+                //Animal object.
+
+                //play with ecma script 6 -- does not work :(
+                age2 = (age)=>{return 2*age};
+                this.twiceAge=age2;
+            }
+            //inherit prototype
+            Person.prototype = Object.create(Animal.prototype);
+            Person.prototype.constructor = Person;
+
+            //extend the Person obj and not animal obj
+            Person.prototype.walk = function(){
+                alert(this.name + " is wlaking");
+            }
+
+            var per1 = new Person("atma");
+            per1.speak();
+            console.log(per1.twiceAge);
+            console.dir(per1);
+        </script>
+    </body>
+</html>

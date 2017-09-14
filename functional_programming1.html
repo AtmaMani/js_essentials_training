@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <script>
+            function isEven(num){
+                return (num%2==0); //true if even.
+            }
+
+            function isOdd(num){
+                return (num%2==1); //true if odd.
+            }
+
+            //You pass the filter as an argument, filter is the pointer to another function
+            function adder(ar, filter){
+                var total=0;
+                for (var index = 0; index < ar.length; index++) {
+                    if (!filter || filter(ar[index])){
+                        //!filter -> means if caller does not pass the func reference for filter, then 
+                        // add all numbers.
+                        total+=ar[index];
+                    }
+                }
+               return total;
+            }
+            // var sum = adder([1,2,3,4,5,6], isEven);
+            var sum = adder([1,2,3,4,5,6]); //call without filter argument.
+            alert(sum);
+        </script>
+    </body>
+</html>
