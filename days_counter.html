@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Days counter</title>
+    </head>
+    <body>
+        <p>Days counter</p>
+        1. Enter contract begin date: <input type="text" id="ctBeginDate" value="Sep 27, 2017"/>
+        <br>
+        2. Enter escrow end date: <input type="text" id="escEndDate" value="Nov 30, 2017"/>
+        <br>
+        <br>
+        <p id="days_since_contract"></p>
+        <p id="escrow_close_counter"></p>
+        <p id="inspection_close_counter"></p>
+        <p id="apprisal_nego_counter"></p>
+
+        <script>
+            
+            //update the counts
+            var x = setInterval(function(){
+                var daysEpoch = 1000*60*60*24;
+                var escrow_end_date_str = document.getElementById('escEndDate').value;
+                var escrow_countDownDate = new Date(escrow_end_date_str).getTime();
+                                
+                //get today's date and time
+                var now = new Date().getTime();
+
+                var contract_begin_str = document.getElementById('ctBeginDate').value;
+                var contract_begin_date = new Date(contract_begin_str).getTime();
+                var insp_countDownDate = contract_begin_date + (14 * daysEpoch); //14 day due dil
+                var apprisal_countDownDate = contract_begin_date + (20 * daysEpoch); //20 day to finish appr
+                
+                //find the distance between now and remaining dates
+                var escrow_distance = escrow_countDownDate - now;
+                var insp_distance = insp_countDownDate - now;
+                var apprisal_distance = apprisal_countDownDate - now;
+                var ctr_up_distance = now - contract_begin_date;
+
+                //time calc
+                var escDays = Math.floor(escrow_distance / daysEpoch);
+                var inspDays = Math.floor(insp_distance / daysEpoch);
+                var apprDays = Math.floor(apprisal_distance / daysEpoch);
+                var ctrSinceDays = Math.floor(ctr_up_distance / daysEpoch);
+
+                //print to screen
+                var div_esc_counter = document.getElementById('escrow_close_counter');
+                var div_insp_couter = document.getElementById('inspection_close_counter');
+                var div_appr_counter = document.getElementById('apprisal_nego_counter');
+                var div_days_since_contract = document.getElementById('days_since_contract');
+
+                div_esc_counter.innerHTML = "Days to escrow: " + escDays + " days";
+                div_insp_couter.innerHTML = "Days to due diligence period: " + inspDays + " days";
+                div_appr_counter.innerHTML = "Days to appraise and negotiate: " + apprDays + " days";
+                div_days_since_contract.innerHTML = "Days since contract began: " + ctrSinceDays +" days";
+            }, 1000);
+        </script>
+    </body>
+</html>
